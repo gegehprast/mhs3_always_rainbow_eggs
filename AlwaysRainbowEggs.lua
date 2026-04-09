@@ -1,4 +1,4 @@
--- AlwaysRainbowEggs.lua v1.1
+-- AlwaysRainbowEggs.lua v1.2
 
 local enabled  = true
 -- Percentage chance (0–100) that a picked egg is forced to SUPERRARE.
