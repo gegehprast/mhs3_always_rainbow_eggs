@@ -1,6 +1,6 @@
 ## Always Rainbow Egg
 
-Every egg you pick from a monster den will always be a **rainbow (highly potent)** egg, regardless of the nest's rarity.
+Every egg you pick from a monster den will be a **rainbow (highly potent)** egg, regardless of the nest's rarity. You can configure the interception rate.
 
 Inspired by [this plugin mod](https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/47) — but as an open-source REFramework Lua script so you can read and verify exactly what it does.
 
@@ -23,7 +23,12 @@ No save data is modified. The change only affects eggs as they are picked.
 
 ## Usage
 
-Open the REFramework menu (default: `Insert` key) and find **Always Rainbow Egg** to toggle the mod on or off. The setting is saved automatically to `AlwaysRainbowEggs.json`.
+Open the REFramework menu (default: `Insert` key) and find **Always Rainbow Eggs**.
+
+- **Enable** — toggles the mod on or off.
+- **Rainbow Chance (%)** — slider from 0 to 100 controlling how often a picked egg is forced to rainbow.
+
+All settings are saved automatically to `AlwaysRainbowEggs.json`.
 
 ## Requirements
 

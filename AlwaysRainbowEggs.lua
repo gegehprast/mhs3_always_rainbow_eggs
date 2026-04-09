@@ -1,6 +1,9 @@
--- AlwaysRainbowEggs.lua v1.0
+-- AlwaysRainbowEggs.lua v1.1
 
 local enabled  = true
+-- Percentage chance (0–100) that a picked egg is forced to SUPERRARE.
+-- At 100 every egg is rainbow; at 0 the hook does nothing even if enabled.
+local superrare_chance = 100
 -- app.EggDef.EGG_RARITY enum: NORMAL=0, RARE=1, SUPERRARE=2
 local SUPERRARE  = 2
 -- Byte offset of the Rarity field inside the EggInfo struct's managed object boxing.
@@ -11,13 +14,16 @@ local RARITY_OFFSET = 72
 local CONFIG_PATH = "AlwaysRainbowEggs.json"
 
 local function save_config()
-    if json then json.dump_file(CONFIG_PATH, { enabled = enabled }) end
+    if json then json.dump_file(CONFIG_PATH, { enabled = enabled, superrare_chance = superrare_chance }) end
 end
 
 local function load_config()
     if not json then return end
     local c = json.load_file(CONFIG_PATH)
     if c and type(c.enabled) == "boolean" then enabled = c.enabled end
+    if c and type(c.superrare_chance) == "number" then
+        superrare_chance = math.max(0, math.min(100, math.floor(c.superrare_chance)))
+    end
 end
 
 load_config()
@@ -34,6 +40,8 @@ if td_ctrl then
         -- `retval` is a pointer to the sret (struct return) buffer on the caller's stack.
         sdk.hook(m, nil, function(retval)
             if not enabled then return retval end
+            -- Roll against the configured chance before modifying.
+            if superrare_chance < 100 and math.random(1, 100) > superrare_chance then return retval end
 
             -- REFramework boxes the raw sret pointer into a managed object we can inspect.
             -- This gives us a stable, typed handle to the EggInfo data.
@@ -59,10 +67,15 @@ else
 end
 
 re.on_draw_ui(function()
-    if imgui.tree_node("Always Rainbow Egg") then
+    if imgui.tree_node("Always Rainbow Eggs") then
         local changed, new_val = imgui.checkbox("Enable", enabled)
         if changed then
             enabled = new_val
+            save_config()
+        end
+        local chance_changed, new_chance = imgui.slider_int("Rainbow Chance (%)", superrare_chance, 0, 100)
+        if chance_changed then
+            superrare_chance = new_chance
             save_config()
         end
         imgui.tree_pop()
