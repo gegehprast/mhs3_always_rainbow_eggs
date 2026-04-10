@@ -1,17 +1,17 @@
 -- AlwaysRainbowEggs.lua v1.2
 
-local enabled  = true
+local enabled          = true
 -- Percentage chance (0–100) that a picked egg is forced to SUPERRARE.
 -- At 100 every egg is rainbow; at 0 the hook does nothing even if enabled.
 local superrare_chance = 100
 -- app.EggDef.EGG_RARITY enum: NORMAL=0, RARE=1, SUPERRARE=2
-local SUPERRARE  = 2
+local SUPERRARE        = 2
 -- Byte offset of the Rarity field inside the EggInfo struct's managed object boxing.
 -- Confirmed by calling sdk.find_type_definition("app.EggDef.EggInfo"):get_field("Rarity"):get_offset_from_base()
 -- which returned 72, and cross-checking that read_dword(72) on the hooked return value
 -- matched the actual rarity of eggs received in-game (0=Normal, 1=Rare, 2=SuperRare).
-local RARITY_OFFSET = 72
-local CONFIG_PATH = "AlwaysRainbowEggs.json"
+local RARITY_OFFSET    = 72
+local CONFIG_PATH      = "AlwaysRainbowEggs.json"
 
 local function save_config()
     if json then json.dump_file(CONFIG_PATH, { enabled = enabled, superrare_chance = superrare_chance }) end
@@ -81,5 +81,3 @@ re.on_draw_ui(function()
         imgui.tree_pop()
     end
 end)
-
-
