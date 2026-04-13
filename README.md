@@ -4,7 +4,7 @@ Every egg you pick from a monster den will be a **rainbow (highly potent)** egg,
 
 Inspired by [this plugin mod](https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/47) — but as an open-source REFramework Lua script so you can read and verify exactly what it does.
 
-> **Disclaimer:** This mod was developed with LLM assistance, primarily for navigating the REFramework API and the probing process. It has not been thoroughly tested — only verified on mid game free-roaming monster dens across different regions. Behavior during story progression has not been tested.
+> **Disclaimer:** This mod was developed with LLM assistance, primarily for navigating the REFramework API and the probing process. ~It has not been thoroughly tested — only verified on mid game free-roaming monster dens across different regions. Behavior during story progression has not been tested.~
 
 ### How It Works
 
@@ -42,7 +42,7 @@ Every egg you pick from a nest is immediately stored into your Egg Box — no ne
 
 When the Egg Box is almost full (last auto-storable slot filled), a heads-up overlay is shown on screen. You can still keep picking; eggs just won't be auto-stored past that point.
 
-> **Disclaimer:** This mod was developed with LLM assistance. It has not been thoroughly tested — only verified on mid game free-roaming monster dens. Behavior during story progression has not been tested.
+> **Disclaimer:** This mod was developed with LLM assistance. ~It has not been thoroughly tested — only verified on mid game free-roaming monster dens. Behavior during story progression has not been tested.~
 
 ### How It Works
 
