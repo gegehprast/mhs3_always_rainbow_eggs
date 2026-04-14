@@ -1,3 +1,11 @@
+## Mods
+
+- [Always Rainbow Egg](#always-rainbow-egg)
+- [Auto Store Picked Up Eggs](#auto-store-picked-up-eggs)
+- [Quick Finish](#quick-finish)
+
+---
+
 ## Always Rainbow Egg
 
 Every egg you pick from a monster den will be a **rainbow (highly potent)** egg, regardless of the nest's rarity. You can configure the interception rate.
@@ -64,6 +72,41 @@ The game normally requires the player to walk to the safe zone to commit a picke
 Open the REFramework menu (default: `Insert` key) and find **Auto Store Picked Up Eggs**.
 
 - **Enable** — toggles the mod on or off.
+
+Config file: `<game folder>/reframework/data/AutoStorePickedUpEggs.json`
+
+### Requirements
+
+- [REFramework](https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/12)
+
+---
+
+## Quick Finish
+
+Makes the Quick Finish (instant kill) option available in all battles, including against high-level enemies and invasive monsters — enemy types where it is normally disabled.
+
+> **Disclaimer:** This mod was developed with LLM assistance. It has not been thoroughly tested. Use at your own risk.
+
+### How It Works
+
+Each turn, the game calls `BattleManager.updateEnableInstantKill(bool)` to decide whether to show the Quick Finish button. For low-level enemies it passes `true`; for high-level or invasive enemies it passes `false`. This mod hooks that call, skips the original body, and instead calls `BattleManager.setUniqueFlag(IsEnableInstantKill, true)` directly — the same underlying flag the game uses, set through the proper API.
+
+### Installation
+
+1. Install [REFramework](https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/12)
+2. Copy `QuickFinish.lua` into:
+   ```
+   <game folder>/reframework/autorun/
+   ```
+3. Launch the game. The mod is active immediately.
+
+### Usage
+
+Open the REFramework menu (default: `Insert` key) and find **Quick Finish**.
+
+- **Enable** — toggles the mod on or off.
+
+Config file: `<game folder>/reframework/data/QuickFinish.json`
 
 ### Requirements
 

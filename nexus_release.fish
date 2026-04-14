@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-for name in AlwaysRainbowEggs AutoStorePickedUpEggs
+for name in AlwaysRainbowEggs AutoStorePickedUpEggs QuickFinish
     set zipfile $name.zip
     if test -f $zipfile
         rm $zipfile
