@@ -85,7 +85,7 @@ Config file: `<game folder>/reframework/data/AutoStorePickedUpEggs.json`
 
 Makes the Quick Finish (instant kill) option available in all battles, including against high-level enemies and invasive monsters — enemy types where it is normally disabled.
 
-> **Disclaimer:** This mod was developed with LLM assistance. It has not been thoroughly tested. Use at your own risk.
+> **Disclaimer:** This mod was developed with LLM assistance.
 
 ### How It Works
 
