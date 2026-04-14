@@ -31,7 +31,9 @@ re.on_draw_ui(function()
 end)
 
 local td = sdk.find_type_definition("app.BattleManager")
-if not td then log.error("[QuickFinish] app.BattleManager NOT FOUND"); return end
+if not td then
+    log.error("[QuickFinish] app.BattleManager NOT FOUND"); return
+end
 
 -- Resolve the IsEnableInstantKill enum value from BattleSysUniqueFlag at load time.
 local flag_IsEnableInstantKill = sdk.find_type_definition("app.BattleManager.BattleSysUniqueFlag")
@@ -39,7 +41,9 @@ local flag_IsEnableInstantKill = sdk.find_type_definition("app.BattleManager.Bat
 log.info("[QuickFinish] IsEnableInstantKill flag value = " .. tostring(flag_IsEnableInstantKill))
 
 local m_update = td:get_method("updateEnableInstantKill")
-if not m_update then log.error("[QuickFinish] updateEnableInstantKill NOT FOUND"); return end
+if not m_update then
+    log.error("[QuickFinish] updateEnableInstantKill NOT FOUND"); return
+end
 
 sdk.hook(m_update, function(args)
     -- Skip original to prevent crash (reason unknown).
