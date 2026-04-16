@@ -1,4 +1,4 @@
--- QuickFinish.lua v1.0
+-- QuickFinish.lua v1.1
 --
 -- Purpose:
 --   Makes the Quick Finish (instant kill) option available in all battles,
@@ -20,12 +20,25 @@
 -- The IsEnableInstantKill enum value is resolved from the BattleSysUniqueFlag
 -- type at script load time, so no magic numbers are hardcoded here.
 
+local CONFIG_PATH = "QuickFinish.json"
 local enabled = true
+
+local function save_config()
+    if json then json.dump_file(CONFIG_PATH, { enabled = enabled }) end
+end
+
+local function load_config()
+    if not json then return end
+    local c = json.load_file(CONFIG_PATH)
+    if c and type(c.enabled) == "boolean" then enabled = c.enabled end
+end
+
+load_config()
 
 re.on_draw_ui(function()
     if imgui.tree_node("Quick Finish") then
         local changed, val = imgui.checkbox("Always enable Quick Finish", enabled)
-        if changed then enabled = val end
+        if changed then enabled = val; save_config() end
         imgui.tree_pop()
     end
 end)
@@ -59,4 +72,4 @@ end, function(retval)
     return retval
 end)
 
-log.info("[QuickFinish] v1.0 loaded")
+log.info("[QuickFinish] v1.1 loaded")

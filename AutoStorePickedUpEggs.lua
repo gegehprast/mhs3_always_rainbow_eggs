@@ -1,4 +1,4 @@
--- AutoStorePickedUpEggs.lua v1.0
+-- AutoStorePickedUpEggs.lua v1.1
 --
 -- Purpose:
 --   When the player interacts with a nest and picks up an egg, this mod
@@ -47,9 +47,24 @@ local SENTINEL_OTID = 2615765376
 -- at the high end of the Egg Box array for the game's own commit path.
 local MAX_CARRY = 2
 
--- ── UI state ──────────────────────────────────────────────────────────────────
+-- ── Config ───────────────────────────────────────────────────────────────────
 
+local CONFIG_PATH = "AutoStorePickedUpEggs.json"
 local enabled = true
+
+local function save_config()
+    if json then json.dump_file(CONFIG_PATH, { enabled = enabled }) end
+end
+
+local function load_config()
+    if not json then return end
+    local c = json.load_file(CONFIG_PATH)
+    if c and type(c.enabled) == "boolean" then enabled = c.enabled end
+end
+
+load_config()
+
+-- ── UI state ──────────────────────────────────────────────────────────────────
 
 -- When we fill the last auto-add slot, show a heads-up to the player.
 local notify_almost_timer = 0
@@ -73,7 +88,7 @@ end)
 re.on_draw_ui(function()
     if imgui.tree_node("Auto Store Picked Up Eggs") then
         local changed, val = imgui.checkbox("Enable", enabled)
-        if changed then enabled = val end
+        if changed then enabled = val; save_config() end
         imgui.tree_pop()
     end
 end)
@@ -290,4 +305,4 @@ if m_send then
     log.info("[AutoStorePickedUpEggs] hooked sendEggObjToPL")
 end
 
-log.info("[AutoStorePickedUpEggs] v1.0 loaded")
+log.info("[AutoStorePickedUpEggs] v1.1 loaded")
